@@ -39,8 +39,8 @@ target_include_directories(OpenOnload
 target_link_libraries(OpenOnload
   INTERFACE  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib/libciul1.a>
              $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib/libonload_ext.a>
-             $<INSTALL_INTERFACE:${OpenOnload_LIB_INSTALL_DIR}/libciul1.a>
-             $<INSTALL_INTERFACE:${OpenOnload_LIB_INSTALL_DIR}/libonload_ext.a>
+             $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${OpenOnload_LIB_INSTALL_DIR}/libciul1.a>
+             $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${OpenOnload_LIB_INSTALL_DIR}/libonload_ext.a>
   )
 
 #=================================================================================
@@ -61,7 +61,6 @@ install(FILES lib/libciul1.a
 
 install(TARGETS OpenOnload EXPORT OpenOnload_export)
 
-# TODO: library path in export target file is relative path, which is not correct
 install(EXPORT OpenOnload_export
   NAMESPACE OpenOnload::
   FILE OpenOnloadTargets.cmake
